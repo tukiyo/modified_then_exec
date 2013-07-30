@@ -3,7 +3,7 @@
 SLEEP=1
 
 execute() {
-    echo "[$CHECK_TIME] $COMMAND ________________________________"
+    echo "[$(date +"%Y/%m/%d %H:%M:%S")] $COMMAND ________________________________"
     $COMMAND
     TIME_MODIFY=$CHECK_TIME
 }
@@ -21,10 +21,10 @@ validate() {
 FILENAME=$1
 COMMAND=$2
 validate
-TIME_MODIFY=$(date -r $FILENAME)
+TIME_MODIFY=$(du -b $FILENAME)
 
 while true;do
-    CHECK_TIME=$(date -r $FILENAME)
+    CHECK_TIME=$(du -b $FILENAME)
     if [ "$TIME_MODIFY" != "$CHECK_TIME" ]; then
         execute
     fi
